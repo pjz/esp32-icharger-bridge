@@ -12,7 +12,6 @@ void IChargerComponent::dump_config() {
 
   LOG_SENSOR("  ", "Channel", channel_sensor_);
   LOG_SENSOR("  ", "Charging Mode ID", charging_mode_id_sensor_);
-  LOG_TEXT_SENSOR("  ", "Charging Mode", charging_mode_text_sensor_);
   LOG_SENSOR("  ", "Timestamp", timestamp_sensor_);
   LOG_SENSOR("  ", "Cycle Count", cycle_count_sensor_);
   LOG_SENSOR("  ", "Step ID", step_id_sensor_);
@@ -32,6 +31,7 @@ void IChargerComponent::dump_config() {
   LOG_SENSOR("  ", "C08", c08_sensor_);
   LOG_SENSOR("  ", "C09", c09_sensor_);
   LOG_SENSOR("  ", "C10", c10_sensor_);
+  LOG_TEXT_SENSOR("  ", "Charging Mode", charging_mode_text_sensor_);
 
   check_uart_settings(115200);
 }
@@ -106,10 +106,10 @@ static std::string flash_to_string(const __FlashStringHelper *flash) {
 void IChargerComponent::handle_value_() {
   int value;
 
-  // TODO: add blocks for case 4.. for:
-  // # 'step_id', 'current', 'input_voltage', 'battery_voltage', 'capacity_mah', 'int_temp', 'ext_temp', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10', 'checksum'
+  // DONE TODO: add blocks for case 4.. for:
+  // 'channel', 'charging_mode_id', 'timestamp', 'cycle_count', 'step_id', 'current', 'input_voltage', 'battery_voltage', 'capacity_mah', 'int_temp', 'ext_temp', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10'
 
-  switch (state) {
+  switch ( state_ ) {
     case 0:
       if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
@@ -127,58 +127,55 @@ void IChargerComponent::handle_value_() {
       if (cycle_count_sensor_ != nullptr) cycle_count_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 4:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (step_id_sensor_ != nullptr) step_id_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 5:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (current_sensor_ != nullptr) current_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 6:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (input_voltage_sensor_ != nullptr) input_voltage_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 7:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (battery_voltage_sensor_ != nullptr) battery_voltage_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 8:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (capacity_mah_sensor_ != nullptr) capacity_mah_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 9:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (int_temp_sensor_ != nullptr) int_temp_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 10:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (ext_temp_sensor_ != nullptr) ext_temp_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 11:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c01_sensor_ != nullptr) c01_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 12:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c02_sensor_ != nullptr) c02_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 13:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c03_sensor_ != nullptr) c03_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 14:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c04_sensor_ != nullptr) c04_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 15:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c05_sensor_ != nullptr) c05_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 16:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c06_sensor_ != nullptr) c06_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 17:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c07_sensor_ != nullptr) c07_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 18:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c08_sensor_ != nullptr) c08_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 19:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c09_sensor_ != nullptr) c09_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     case 20:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
-      break;
-    case 21:
-      if (channel_sensor_ != nullptr) channel_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
+      if (c10_sensor_ != nullptr) c10_sensor_->publish_state(atoi(value_.c_str()));  // NOLINT(cert-err34-c)
       break;
     default:
       break;
