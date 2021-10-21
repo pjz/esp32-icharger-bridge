@@ -11,7 +11,6 @@ namespace icharger {
 class IChargerComponent : public uart::UARTDevice, public Component {
  public:
 
-  // DONE TODO: add set_<sensorname>_sensor for:
   // 'channel', 'charging_mode_id', 'timestamp', 'cycle_count', 'step_id', 'current', 'input_voltage', 'battery_voltage', 'capacity_mah', 'int_temp', 'ext_temp', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10'
   void set_channel_sensor(sensor::Sensor *s) {
     channel_sensor_ = s;
@@ -46,34 +45,36 @@ class IChargerComponent : public uart::UARTDevice, public Component {
   void set_ext_temp_sensor(sensor::Sensor *s) {
     ext_temp_sensor_ = s;
   }
-  void set_c1_sensor(sensor::Sensor *s) {
-    c1_sensor_ = s;
+  void set_c01_sensor(sensor::Sensor *s) {
+    c01_sensor_ = s;
   }
-  void set_c2_sensor(sensor::Sensor *s) {
-    c2_sensor_ = s;
+  void set_c02_sensor(sensor::Sensor *s) {
+    c02_sensor_ = s;
   }
-  void set_c3_sensor(sensor::Sensor *s) {
-    c3_sensor_ = s;
+  void set_c03_sensor(sensor::Sensor *s) {
+    c03_sensor_ = s;
   }
-  void set_c4_sensor(sensor::Sensor *s) {
-    c4_sensor_ = s;
+  void set_c04_sensor(sensor::Sensor *s) {
+    c04_sensor_ = s;
   }
-  void set_c5_sensor(sensor::Sensor *s) {
-    c5_sensor_ = s;
+  void set_c05_sensor(sensor::Sensor *s) {
+    c05_sensor_ = s;
   }
-  void set_c6_sensor(sensor::Sensor *s) {
-    c6_sensor_ = s;
+  void set_c06_sensor(sensor::Sensor *s) {
+    c06_sensor_ = s;
   }
-  void set_c7_sensor(sensor::Sensor *s) {
-    c7_sensor_ = s;
+  void set_c07_sensor(sensor::Sensor *s) {
+    c07_sensor_ = s;
   }
-  void set_c8_sensor(sensor::Sensor *s) {
-    c8_sensor_ = s;
+  void set_c08_sensor(sensor::Sensor *s) {
+    c08_sensor_ = s;
   }
-  void set_c9_sensor(sensor::Sensor *s) {
-    c9_sensor_ = s;
+  void set_c09_sensor(sensor::Sensor *s) {
+    c09_sensor_ = s;
   }
-}
+  void set_c10_sensor(sensor::Sensor *s) {
+    c10_sensor_ = s;
+  }
   void set_charging_mode_text_sensor(text_sensor::TextSensor *s) {
     charging_mode_text_sensor_ = s;
   }
@@ -86,8 +87,6 @@ class IChargerComponent : public uart::UARTDevice, public Component {
  protected:
   void handle_value_();
 
-  // TODO: add set_<sensorname>_sensor for:
-  // 'channel', 'charging_mode_id', 'timestamp', 'cycle_count', 'step_id', 'current', 'input_voltage', 'battery_voltage', 'capacity_mah', 'int_temp', 'ext_temp', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10'
   sensor::Sensor *channel_sensor_{nullptr};
   sensor::Sensor *charging_mode_id_sensor_{nullptr};
   sensor::Sensor *timestamp_sensor_{nullptr};

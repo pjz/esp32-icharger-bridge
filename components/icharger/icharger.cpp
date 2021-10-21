@@ -70,6 +70,7 @@ void IChargerComponent::loop() {
   }
 }
 
+// TODO: Make these strings accurate based on the API
 static const __FlashStringHelper *charging_mode_text(int value) {
   switch (value) {
     case 0:
@@ -106,7 +107,6 @@ static std::string flash_to_string(const __FlashStringHelper *flash) {
 void IChargerComponent::handle_value_() {
   int value;
 
-  // DONE TODO: add blocks for case 4.. for:
   // 'channel', 'charging_mode_id', 'timestamp', 'cycle_count', 'step_id', 'current', 'input_voltage', 'battery_voltage', 'capacity_mah', 'int_temp', 'ext_temp', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10'
 
   switch ( state_ ) {

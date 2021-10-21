@@ -23,7 +23,7 @@ All sensors are optional.
 
 The available numeric sensors are:
 - 'channel'
-- 'charging_mode'
+- 'charging_mode_id'
 - 'timestamp'
 - 'cycle_count'
 - 'step_id'
@@ -43,7 +43,9 @@ The available numeric sensors are:
 - 'c08'
 - 'c09'
 - 'c10'
-- 'checksum'
+
+The available numeric sensors are:
+- 'charging_mode_text'
 
 Example for multiple devices:
 ```yaml
