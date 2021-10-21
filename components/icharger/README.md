@@ -21,10 +21,9 @@ The `uart_id` is optional.
 
 All sensors are optional.
 
-The available numeric sensors are
-
+The available numeric sensors are:
 - 'channel'
-- 'mode'
+- 'charging_mode'
 - 'timestamp'
 - 'cycle_count'
 - 'step_id'

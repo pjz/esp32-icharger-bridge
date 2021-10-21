@@ -47,6 +47,9 @@ DEPENDENCIES = [COMPONENT_NAME]
 # 'c10'
 # 'checksum'
 
+# TODO: make all the CONF_ vars
+CONF_CHANNEL = "channel"
+
 CONF_MAX_POWER_YESTERDAY = "max_power_yesterday"
 CONF_MAX_POWER_TODAY = "max_power_today"
 CONF_YIELD_TOTAL = "yield_total"
@@ -65,7 +68,11 @@ CONF_LOAD_CURRENT = "load_current"
 CONF_AC_OUT_VOLTAGE = "ac_out_voltage"
 CONF_AC_OUT_CURRENT = "ac_out_current"
 
+# TODO: put all the new CONF vars into the SENSORS list
 SENSORS = [
+    CONF_CHANNEL,
+
+
     CONF_BATTERY_VOLTAGE,
     CONF_AC_OUT_VOLTAGE,
     CONF_MAX_POWER_YESTERDAY,
@@ -90,6 +97,12 @@ CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(CONF_COMPONENT_ID): cv.use_id(IChargerComponent),
 
+        cv.Optional(CONF_CHANNEL): sensor.sensor_schema(
+            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
+        ),
+
+
+        # TODO: setup all the units and labels
 
 
         cv.Optional(CONF_MAX_POWER_YESTERDAY): sensor.sensor_schema(
