@@ -11,7 +11,7 @@ from esphome.const import (
     ICON_EMPTY,
     ICON_FLASH,
     ICON_POWER,
-    UNIT_TEMPERATURE,
+    UNIT_CELSIUS,
     UNIT_AMPERE,
     UNIT_EMPTY,
     UNIT_VOLT,
