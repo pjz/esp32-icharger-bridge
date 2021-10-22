@@ -3,6 +3,7 @@ import esphome.config_validation as cv
 from esphome.components import sensor
 from esphome.const import (
     CONF_BATTERY_VOLTAGE,
+    CONF_CURRENT,
     DEVICE_CLASS_CURRENT,
     DEVICE_CLASS_EMPTY,
     DEVICE_CLASS_VOLTAGE,
@@ -53,9 +54,9 @@ SENSORS = [
     CONF_TIMESTAMP        := 'timestamp',
     CONF_CYCLE_COUNT      := 'cycle_count',
     CONF_STEP_ID          := 'step_id',
-    CONF_CURRENT          := 'current',
+    CONF_CURRENT,          # standard, from esphome.const
     CONF_INPUT_VOLTAGE    := 'input_voltage',
-    CONF_BATTERY_VOLTAGE,
+    CONF_BATTERY_VOLTAGE,  # standard, from esphome.const
     CONF_CAPACITY_MAH     := 'capacity_mah',
     CONF_INT_TEMP         := 'int_temp',
     CONF_EXT_TEMP         := 'ext_temp',
