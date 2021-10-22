@@ -1,3 +1,6 @@
+
+#define USE_STORE_LOG_STR_IN_FLASH 1
+
 #include "icharger.h"
 #include "esphome/core/log.h"
 #include <algorithm>  // std::min
