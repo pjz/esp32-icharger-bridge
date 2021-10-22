@@ -73,80 +73,48 @@ SENSORS = [
     # CONF_CHECKSUM         = 'checksum',
 ]
 
+s_s = sensor.sensor_schema
+
+
+def empty_schema(icon=ICON_EMPTY):
+    return s_s(UNIT_EMPTY, icon, 0, DEVICE_CLASS_EMPTY)
+
+
+def volt_schema():
+    return s_s(UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE)
+
+
+def celsius_schema():
+    return s_s(UNIT_CELSIUS, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE)
+
 
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(CONF_COMPONENT_ID): cv.use_id(IChargerComponent),
 
-        cv.Optional(CONF_CHANNEL): sensor.sensor_schema(
-            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
-        ),
-        cv.Optional(CONF_CHARGING_MODE_ID): sensor.sensor_schema(
-            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
-        ),
-        cv.Optional(CONF_TIMESTAMP): sensor.sensor_schema(
-            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
-        ),
-        cv.Optional(CONF_CYCLE_COUNT): sensor.sensor_schema(
-            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
-        ),
-        cv.Optional(CONF_STEP_ID): sensor.sensor_schema(
-            UNIT_EMPTY, ICON_EMPTY, 0, DEVICE_CLASS_EMPTY
-        ),
+        cv.Optional(CONF_CHANNEL):          empty_schema(),
+        cv.Optional(CONF_CHARGING_MODE_ID): empty_schema(),
+        cv.Optional(CONF_TIMESTAMP):        empty_schema(),
+        cv.Optional(CONF_CYCLE_COUNT):      empty_schema(),
+        cv.Optional(CONF_STEP_ID):          empty_schema(),
         cv.Optional(CONF_CURRENT): sensor.sensor_schema(
             UNIT_AMPERE, ICON_CURRENT_AC, 0, DEVICE_CLASS_CURRENT
         ),
-        cv.Optional(CONF_INPUT_VOLTAGE): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_BATTERY_VOLTAGE): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_CAPACITY_MAH): sensor.sensor_schema(
-            UNIT_EMPTY, ICON_POWER, 0, DEVICE_CLASS_EMPTY  # maybe should be UNIT_WATT?
-        ),
-        cv.Optional(CONF_C01): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C01): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_INT_TEMP): sensor.sensor_schema(
-            UNIT_CELSIUS, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE
-        ),
-        cv.Optional(CONF_EXT_TEMP): sensor.sensor_schema(
-            UNIT_CELSIUS, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE
-        ),
-        cv.Optional(CONF_C01): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C02): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C03): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C04): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C05): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C06): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C07): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C08): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C09): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
-        cv.Optional(CONF_C10): sensor.sensor_schema(
-            UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
-        ),
+        cv.Optional(CONF_INPUT_VOLTAGE):    volt_schema(),
+        cv.Optional(CONF_BATTERY_VOLTAGE):  volt_schema(),
+        cv.Optional(CONF_CAPACITY_MAH):     empty_schema(icon=ICON_POWER),
+        cv.Optional(CONF_INT_TEMP): celsius_schema(),
+        cv.Optional(CONF_EXT_TEMP): celsius_schema(),
+        cv.Optional(CONF_C01): volt_schema(),
+        cv.Optional(CONF_C02): volt_schema(),
+        cv.Optional(CONF_C03): volt_schema(),
+        cv.Optional(CONF_C04): volt_schema(),
+        cv.Optional(CONF_C05): volt_schema(),
+        cv.Optional(CONF_C06): volt_schema(),
+        cv.Optional(CONF_C07): volt_schema(),
+        cv.Optional(CONF_C08): volt_schema(),
+        cv.Optional(CONF_C09): volt_schema(),
+        cv.Optional(CONF_C10): volt_schema(),
     }
 )
 
