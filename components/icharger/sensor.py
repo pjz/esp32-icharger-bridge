@@ -111,10 +111,10 @@ CONFIG_SCHEMA = cv.Schema(
             UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
         ),
         cv.Optional(CONF_INT_TEMP): sensor.sensor_schema(
-            UNIT_TEMPERATURE, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE
+            UNIT_CELSIUS, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE
         ),
         cv.Optional(CONF_EXT_TEMP): sensor.sensor_schema(
-            UNIT_TEMPERATURE, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE
+            UNIT_CELSIUS, ICON_FLASH, 0, DEVICE_CLASS_TEMPERATURE
         ),
         cv.Optional(CONF_C01): sensor.sensor_schema(
             UNIT_VOLT, ICON_FLASH, 0, DEVICE_CLASS_VOLTAGE
