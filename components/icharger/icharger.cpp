@@ -71,45 +71,27 @@ void IChargerComponent::loop() {
   }
 }
 
-#ifdef USE_STORE_LOG_STR_IN_FLASH
-static std::string flash_to_string(const __FlashStringHelper *flash) {
-  std::string result;
-  const char *fptr = (PGM_P) flash;
-  result.reserve(strlen_P(fptr));
-  char c;
-  while ((c = pgm_read_byte(fptr++)) != 0)
-    result.push_back(c);
-  return result;
-}
-
-static const __FlashStringHelper *charging_mode_text(int value) {
-#else
-
-#define F(s) s
-#define flash_to_string(s) s
-
 char* charging_mode_text(int value) {
-#endif
 // TODO: Make these strings accurate based on the API
   switch (value) {
     case 0:
-      return F("Off");
+      return "Off";
     case 2:
-      return F("Balance");
+      return "Balance";
     case 3:
-      return F("Charging");
+      return "Charging";
     case 4:
-      return F("Cycling");
+      return "Cycling";
     case 5:
-      return F("Discharging");
+      return "Discharging";
     case 7:
-      return F("Failing");
+      return "Failing";
     case 9:
-      return F("Explosion imminent");
+      return "Explosion imminent";
     case 245:
-      return F("Initializing");
+      return "Initializing";
     default:
-      return F("Unknown");
+      return "Unknown";
   }
 }
 
@@ -124,11 +106,9 @@ void IChargerComponent::handle_value_() {
       break;
     case 1:
       value = atoi(value_.c_str());  // NOLINT(cert-err34-c)
-      if (charging_mode_id_sensor_ != nullptr)
-        charging_mode_id_sensor_->publish_state(value);
-      if (charging_mode_text_sensor_ != nullptr) {
-        charging_mode_text_sensor_->publish_state(flash_to_string(charging_mode_text(value)));
-      }
+      if (charging_mode_id_sensor_ != nullptr) charging_mode_id_sensor_->publish_state(value);
+      if (charging_mode_text_sensor_ != nullptr)
+        charging_mode_text_sensor_->publish_state(charging_mode_text(value));
       break;
     case 2:
       if (timestamp_sensor_ != nullptr) timestamp_sensor_->publish_state(atol(value_.c_str()));  // NOLINT(cert-err34-c)
