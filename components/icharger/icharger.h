@@ -1,7 +1,5 @@
 #pragma once
 
-#define USE_STORE_LOG_STR_IN_FLASH 1
-
 #include "esphome/core/component.h"
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/text_sensor/text_sensor.h"
