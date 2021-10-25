@@ -1,0 +1,101 @@
+# ESP32 Dev module, or similar
+# Hardware setup: Connect device TX to GPIO3, RX to GPIO1.
+# Description: decodes iCharger logging strings. 4010duo supported.
+
+substitutions:
+  devicename: "esp32-icharger-bridge"
+
+
+external_components:
+  - source: github://pjz/esp32-icharger-bridge@main
+    refresh: 0s
+
+esphome:
+  name: ${devicename}
+  platform: ESP32
+  board: esp-wrover-kit
+
+wifi:
+  networks:
+  - ssid: !secrets wifi_pass
+    password: !secrets wifi_pass
+  fast_connect: true
+
+logger:
+  baud_rate: 0 # disable logging over uart
+#  level: DEBUG # choose this to see logging data via UART
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+
+
+########################### UART / MODBUS ###########################
+uart:
+  id: uart1n3
+  tx_pin: GPIO1
+  rx_pin: GPIO3
+  baud_rate: 115200
+  rx_buffer_size: 256
+
+icharger:
+  id: icharger0
+  uart_id: uart1n3
+
+sensor:
+  - platform: icharger
+    icharger_id: icharger0
+    channel:
+      name: "${devicename} Channel"
+    charging_mode_id:
+      name: "${devicename} Charging Mode ID"
+    timestamp:
+      name: "${devicename} Timestamp"
+    cycle_count:
+      name: "${devicename} Cycle Count"
+    step_id:
+      name: "${devicename} Step ID"
+    current:
+      name: "${devicename} Current"
+    input_voltage:
+      name: "${devicename} Input Voltage"
+    battery_voltage:
+      name: "${devicename} Battery Voltage"
+    capacity_mah:
+      name: "${devicename} Capacity mAh"
+    int_temp:
+      name: "${devicename} Internal Temperature"
+    ext_temp:
+      name: "${devicename} External Temperature"
+    c01:
+      name: "${devicename} C01"
+    c02:
+      name: "${devicename} C02"
+    c03:
+      name: "${devicename} C03"
+    c04:
+      name: "${devicename} C04"
+    c05:
+      name: "${devicename} C05"
+    c06:
+      name: "${devicename} C06"
+    c07:
+      name: "${devicename} C07"
+    c08:
+      name: "${devicename} C08"
+    c09:
+      name: "${devicename} C09"
+    c10:
+      name: "${devicename} C10"
+
+
+text_sensor:
+  - platform: icharger
+    icharger_id: icharger0
+    charging_mode:
+      name: "${devicename} Charging Mode"
+
+
+
