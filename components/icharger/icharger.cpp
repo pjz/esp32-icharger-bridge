@@ -72,7 +72,6 @@ void IChargerComponent::loop() {
 }
 
 char* charging_mode_text(int value) {
-#endif
 // TODO: Make these strings accurate based on the icharger protocol
   switch (value) {
     case 1:
